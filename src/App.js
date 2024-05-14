@@ -14,7 +14,7 @@ function App() {
   const addTodo = () => {
     if (newTodo.trim()) {
       const todo = {
-        id: Date.now(), // Use the current timestamp as a unique ID
+        id: Date.now(), 
         text: newTodo,
         completed: false,
       };
