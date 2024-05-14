@@ -6,9 +6,11 @@ import TodoList from './components/TodoList';
 function App() {
   const [todos, setTodos] = useState([]);
   const [newTodo, setNewTodo] = useState('');
+
   const deleteTodo = (id) => {
     setTodos(todos.filter((todo) => todo.id !== id));
   };
+
   const addTodo = () => {
     if (newTodo.trim()) {
       const todo = {
@@ -19,6 +21,13 @@ function App() {
       setTodos([...todos, todo]);
       setNewTodo('');
     }
+  };
+
+  const editTodo = (id, newText) => {
+    const updatedTodos = todos.map((todo) =>
+      todo.id === id ? { ...todo, text: newText } : todo
+    );
+    setTodos(updatedTodos);
   };
 
   useEffect(() => {
@@ -40,8 +49,7 @@ function App() {
         setNewTodo={setNewTodo}
         addTodo={addTodo}
       />
-      <TodoList todos={todos} />
-      <TodoList todos={todos} deleteTodo={deleteTodo} />
+      <TodoList todos={todos} deleteTodo={deleteTodo} editTodo={editTodo} />
     </div>
   );
 }

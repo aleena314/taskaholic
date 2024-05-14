@@ -1,18 +1,27 @@
 import React from 'react';
 import './TodoList.css';
 
-const TodoList = ({ todos , deleteTodo}) => {
+function TodoList({ todos, deleteTodo, editTodo }) {
+  const handleEdit = (id) => {
+    const newText = prompt('Edit todo:', todos.find(todo => todo.id === id).text);
+    if (newText) {
+      editTodo(id, newText);
+    }
+  };
+
   return (
-    <ul> className="todo-list">
+    <ul>
       {todos.map((todo) => (
-         <li key={todo.id} className="todo-item">
-            {todo.text}
-           <button onClick={() => deleteTodo(todo.id)}>Delete</button>
-           </li> 
-        <li key={todo.id}>{todo.text}</li>
+        <li key={todo.id}>
+          <span>{todo.text}</span>
+          <div>
+            <button onClick={() => handleEdit(todo.id)}>Edit</button>
+            <button onClick={() => deleteTodo(todo.id)}>Delete</button>
+          </div>
+        </li>
       ))}
     </ul>
   );
-};
+}
 
 export default TodoList;
